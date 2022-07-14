@@ -34,8 +34,22 @@ app.use(cors(optionsCors));
 //Nuestro primer WS Get
 const __API__ = 'https://api.spaceflightnewsapi.net/v3/articles?_limit=10';
 
+// middleware de nivel de aplicación
+app.use((req, res, next) => {
+  const cacheTime = 60*5; // 60 seconds * 5 minutes = 5 minutes
+  
+  if (req.method == 'GET') {
+    res.set('Cache-control', `public, max-age=${cacheTime}`)
+  } else {
+    // for the other requests set strict no caching parameters
+    res.set('Cache-control', `no-store`)
+  }
+
+  next();
+});
+
 // title, url, imageUrl
-app.get('/', async (req, res) => {    
+app.get('/', async (req, res) => {
     try {
         const { data } = await axios.get(__API__);
         //return data;

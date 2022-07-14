@@ -45,7 +45,7 @@ const optionsCors = {
 
 app.use(cors(optionsCors));
 
-const __API__ = 'https://api.spaceflightnewsapi.net/v3/articles?_limit=10';
+const __API__ = 'https://api.spaceflightnewsapi.net/v3/articles?_limit=100';
 
 // middleware de nivel de aplicación
 app.use((req, res, next) => {

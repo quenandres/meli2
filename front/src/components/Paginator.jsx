@@ -1,17 +1,45 @@
-import React, { useState } from 'react';
-import { Button, Pagination } from '@mui/material';
+import * as React from 'react';
+import { styled } from '@mui/material/styles';
 
+const List = styled('ul')({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+  display: 'flex',
+});
 
-function Paginator() {
+export default function UsePagination({ items, pageSelect, setPageSelect }) {
+  return (
+    <nav>
+      <List>
+        {items.map(({ page, type, selected, ...item }, index) => {
+          let children = null;
 
-    const [pageSelect, setPageSelect] = useState(1);
+          if (type === 'start-ellipsis' || type === 'end-ellipsis') {
+            children = '…';
+          } else if (type === 'page') {
+            children = (
+              <button
+                type="button"
+                style={{
+                  fontWeight: selected ? 'bold' : undefined,
+                }}
+                {...item}
+              >
+                {page}
+              </button>
+            );
+          } else {
+            children = (
+              <button type="button" {...item}>
+                {type}
+              </button>
+            );
+          }
 
-    return ( 
-        <>
-            <h1> {pageSelect} </h1>
-            <Pagination count={10} color="primary" />
-        </>
-    );
+          return <li key={index} onClick={() => setPageSelect(page)}>{children}</li>;
+        })}
+      </List>
+    </nav>
+  );
 }
-
-export default Paginator;

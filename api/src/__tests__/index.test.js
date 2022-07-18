@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../index');
+const app     = require('../index');
 
 describe('Get articles', () => {
   it('Debe recibir los datos', async () => {
@@ -19,5 +19,11 @@ describe('Get articles', () => {
     const keys = Object.keys(obj);
 
     expect(keys).toEqual(['title', 'url', 'imageUrl']);
+  });
+
+  it('validacion de error', async() => {
+    const res = await request(app).get('/test');
+    expect(res.statusCode).toEqual(404);
+    console.log(res);
   });
 })

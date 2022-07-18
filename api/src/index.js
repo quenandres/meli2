@@ -80,8 +80,16 @@ app.get('/', async (req, res) => {
     } catch (error) {
       console.log(error);
     }
-})
- 
+});
+
+/* app.get('*', function(req, res){
+  res.status(404).json({message: 'Not found'});
+}); */
+
+app.use(function(req, res){
+  res.send(404);
+});
+
 //Iniciando el servidor
 const server = app.listen(app.get('port'),()=>{
     console.log(`Server listening on port ${app.get('port')}`);

@@ -82,7 +82,7 @@ app.get('/', async (req, res) => {
       const exist = await GET_ASYNC('articles');
       if(exist) {
           setInterval(async () => {
-            console.log('Elimina datos de REDIS a los 5min');
+            console.log('-----------------Elimina datos de REDIS a los 5min');
             await DEL_ASYNC('articles');
           }, 100000);
       }

@@ -18,7 +18,6 @@ function ListArticles() {
     // title, url, imageUrl
     return ( 
     <>
-        <h1>Principal</h1>                
             <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
                 {articles.length && articles.map((article, index) => {
                     if(article.page === pageSelect) {

@@ -48,17 +48,6 @@ app.use(cors(optionsCors));
 
 const __API__ = 'https://api.spaceflightnewsapi.net/v3/articles?_limit=100';
 
-// middleware de nivel de aplicación
-app.use((req, res, next) => {
-  const cacheTime = 60*5; // 60 seconds * 5 minutes = 5 minutes  
-  if (req.method == 'GET') {
-    res.set('Cache-control', `public, max-age=${cacheTime}`)
-  } else {
-    res.set('Cache-control', `no-store`)
-  }
-  next();
-});
-
 /**
  * Metodo para obtener el listado y filtrarlo por los 3 campos requeridos
  */
@@ -77,15 +66,15 @@ app.get('/', async (req, res) => {
       });
       console.log('Trae datos del api');      
       await SET_ASYNC('articles', JSON.stringify({ data: response }));
-
+      
       // Genero metodo para que elimine datos cada 5min
-      const exist = await GET_ASYNC('articles');
-      if(exist) {
-          setInterval(async () => {
-            console.log('-----------------Elimina datos de REDIS a los 5min');
-            await DEL_ASYNC('articles');
-          }, 10000);
-      }
+      setInterval(async () => {
+        const exist = await GET_ASYNC('articles');
+        if( exist ) {
+          console.log('-----------------Elimina datos de REDIS a los 5min');
+          await DEL_ASYNC('articles');
+        }
+      }, 10000);
 
       return res.json({data: response});
     } catch (error) {

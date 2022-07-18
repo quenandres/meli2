@@ -8,8 +8,10 @@ function ItemArticle({article}) {
     
         return (
             <>    
-               <Card style={{ width: '18rem' }}>
+               <Card style={{ width: '18rem', heigth: '400px' }}>
                     <LazyLoadImage
+                    width="200"
+                    height="200"
                     src={article.imageUrl}
                     />
                     <Card.Body>

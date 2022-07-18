@@ -12,8 +12,10 @@
 - [ ] Desarrollar la solución, con los testing unitarios correspondientes
   
 ## Tasks - testing
-- [ ] Backend funcional exportando 100 registros 
-- [ ] Especificar que se exporten los campos necesarios
+- [x] Backend funcional exportando 100 registros 
+- [x] Especificar que se exporten los campos necesarios
+- [ ] Funcionamiento del paginador
+- [ ] Verificación de los datos en cache
 - [x] Crear paginador eficiente
 - [x] Que el front lea el api
 - [x] Que se pinten los datos
@@ -28,3 +30,7 @@
 - [ ] Manejo del lenguaje y framework
 - [ ] Calidad de unit test
 - [ ] Uso de librerias de terceros
+
+## Testing
+- front: https://www.paradigmadigital.com/dev/react-testing-library-como-testear-hooks/
+- back: https://dev.to/nedsoft/testing-nodejs-express-api-with-jest-and-supertest-1km6?signin=true#fromHistory

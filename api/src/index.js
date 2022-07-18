@@ -55,8 +55,8 @@ app.get('/', async (req, res) => {
     try {
       const reply = await GET_ASYNC('articles');
       if(reply) {
-        console.log('Trae datos del REDIS');
-          return res.json(JSON.parse(reply));
+        //console.log('Trae datos del REDIS');
+        return res.json(JSON.parse(reply));
       }
       
       const { data } = await axios.get(__API__);
@@ -64,25 +64,28 @@ app.get('/', async (req, res) => {
       let response = data.map(({title, url, imageUrl}) => {
         return {title, url, imageUrl};
       });
-      console.log('Trae datos del api');      
+      //console.log('Trae datos del api');      
       await SET_ASYNC('articles', JSON.stringify({ data: response }));
       
       // Genero metodo para que elimine datos cada 5min
       setInterval(async () => {
         const exist = await GET_ASYNC('articles');
         if( exist ) {
-          console.log('-----------------Elimina datos de REDIS a los 5min');
+          //console.log('-----------------Elimina datos de REDIS a los 5min');
           await DEL_ASYNC('articles');
         }
       }, 10000);
 
-      return res.json({data: response});
+      return res.status(200).json({data: response});
     } catch (error) {
       console.log(error);
     }
 })
  
 //Iniciando el servidor
-app.listen(app.get('port'),()=>{
+const server = app.listen(app.get('port'),()=>{
     console.log(`Server listening on port ${app.get('port')}`);
 });
+
+
+module.exports = server;

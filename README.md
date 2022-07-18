@@ -7,18 +7,18 @@
   - imagen
   - url
 - [x] Se deben paginar los datos de a 10
-- [ ] Solo se pueden hacer llamadas al api cada 5min
+- [x] Solo se pueden hacer llamadas al api cada 5min
 - [x] Establecer estrategia de pagiado eficiente
 - [ ] Desarrollar la solución, con los testing unitarios correspondientes
   
 ## Tasks - testing
 - [ ] Backend funcional exportando 100 registros 
 - [ ] Especificar que se exporten los campos necesarios
-- [ ] Crear paginador eficiente
+- [x] Crear paginador eficiente
 - [x] Que el front lea el api
 - [x] Que se pinten los datos
 - [x] Poner en funcionamiento REDIS
-- [ ] Eliminar redis despues de 5min
+- [x] Eliminar redis despues de 5min
 
 ### Que se evalua
 - [ ] Correcta elección de patrones para el problema propuesto

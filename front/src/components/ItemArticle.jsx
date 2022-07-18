@@ -1,26 +1,29 @@
 import React from 'react';
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardImage } from 'mdb-react-ui-kit';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-function ItemArticle({article, pageSelect}) {
-    if(article.page === pageSelect) {
+
+function ItemArticle({article}) {
+    
         return (
-            <>            
-                <MDBCard className='h-100'>
-                    <MDBCardImage width="50" src='https://mdbootstrap.com/img/new/standard/city/041.webp' alt='...' position='top' />
-                    <MDBCardBody>
-                    <MDBCardTitle>Card title</MDBCardTitle>
-                    <MDBCardText>
-                        This is a wider card with supporting text below as a natural lead-in to additional content. This
-                        content is a little bit longer.
-                    </MDBCardText>
-                    <MDBCardText>
-                        <small className='text-muted'>Last updated 3 mins ago</small>
-                    </MDBCardText>
-                    </MDBCardBody>
-                </MDBCard>                
+            <>    
+               <Card style={{ width: '18rem' }}>
+                    <LazyLoadImage
+                    src={article.imageUrl}
+                    />
+                    <Card.Body>
+                        <Card.Title>{article.title}</Card.Title>
+                        <Card.Text>
+                            <a href={article.url}>
+                                <Button variant="primary">Go somewhere</Button>
+                            </a>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
             </>          
         );
-    }
+    
 }
 
 export default ItemArticle;

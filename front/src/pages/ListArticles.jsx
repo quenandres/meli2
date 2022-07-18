@@ -14,10 +14,6 @@ function ListArticles() {
     const { items } = usePagination({
       count: 10,
     });
-      
-    useEffect(() => {
-
-    }, []);
 
     // title, url, imageUrl
     return ( 
@@ -27,7 +23,9 @@ function ListArticles() {
                 
                 <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
                     {articles.length && articles.map((article, index) => {
-                        return <ItemArticle key={index} article={article} pageSelect={pageSelect} />
+                        if(article.page === pageSelect) {
+                            return <ItemArticle key={index} article={article} />
+                        }
                     })}
                 </MDBRow>
                 

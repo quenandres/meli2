@@ -14,6 +14,7 @@ const client = redis.createClient({
 
 const GET_ASYNC = promisify(client.get).bind(client);
 const SET_ASYNC = promisify(client.set).bind(client);
+const DEL_ASYNC = promisify(client.del).bind(client);
 
 client.connect();
 client.on('error', (err) => console.log('Redis Client Error', err));
@@ -28,11 +29,11 @@ app.use(responseTime());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
-const cors      = require('cors');
+const cors = require('cors');
 
 
 
-const whitelist = ['http://localhost:5500', 'http://localhost:3000', 'http://127.0.0.1:5500','http://127.0.0.1:5500/nodejs/backend-api-rest/index.html'];
+const whitelist = ['http://localhost:3000'];
 const optionsCors = {
   origin: (origin, callback) => {
     if( whitelist.includes(origin) || !origin ) { // !origin para especifica el origen asi mismo
@@ -65,6 +66,7 @@ app.get('/', async (req, res) => {
     try {
       const reply = await GET_ASYNC('articles');
       if(reply) {
+        console.log('Trae datos del REDIS');
           return res.json(JSON.parse(reply));
       }
       
@@ -73,8 +75,18 @@ app.get('/', async (req, res) => {
       let response = data.map(({title, url, imageUrl}) => {
         return {title, url, imageUrl};
       });
-      
+      console.log('Trae datos del api');      
       await SET_ASYNC('articles', JSON.stringify({ data: response }));
+
+      // Genero metodo para que elimine datos cada 5min
+      const exist = await GET_ASYNC('articles');
+      if(exist) {
+          setInterval(async () => {
+            console.log('Elimina datos de REDIS a los 5min');
+            await DEL_ASYNC('articles');
+          }, 100000);
+      }
+
       return res.json({data: response});
     } catch (error) {
       console.log(error);

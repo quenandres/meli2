@@ -84,7 +84,7 @@ app.get('/', async (req, res) => {
           setInterval(async () => {
             console.log('-----------------Elimina datos de REDIS a los 5min');
             await DEL_ASYNC('articles');
-          }, 100000);
+          }, 10000);
       }
 
       return res.json({data: response});

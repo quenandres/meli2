@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
+import Pagination from 'react-bootstrap/Pagination';
 
 const List = styled('ul')({
   listStyle: 'none',
@@ -9,16 +10,10 @@ const List = styled('ul')({
 });
 
 export default function UsePagination({ items, pageSelect, setPageSelect }) {
-  
   return (
     <nav>
       <List>
         {items.map(({ page, type, selected, ...item }, index) => {
-          let func_page = null;
-          if( page > 0 && page <= 10 ) {
-            func_page = setPageSelect(page);
-          }
-
           let children = null;
 
           if (type === 'start-ellipsis' || type === 'end-ellipsis') {
@@ -31,26 +26,28 @@ export default function UsePagination({ items, pageSelect, setPageSelect }) {
                 style={{
                   fontWeight: selected ? 'bold' : undefined,
                 }}
-                onClick={func_page}
                 {...item}
               >
                 {page}
               </button>
             );
-          } else {           
-            
+          } else {
             children = (
               <button 
                 className='btn btn-success btn-sm'
                 type="button" {...item}
-                onClick={func_page}
               >
-               {type}
+                {type}
               </button>
             );
           }
 
-          return <li key={index}>{children}</li>;
+          if( page > 0 && page <=10 ) {
+            return <li key={index} onClick={() => setPageSelect(page)}>{children}</li>;
+          } else {
+            return <li key={index}>{children}</li>;
+          }
+
         })}
       </List>
     </nav>

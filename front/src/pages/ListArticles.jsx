@@ -7,7 +7,6 @@ import { MDBRow } from 'mdb-react-ui-kit';
 
 function ListArticles() {
 
-    //const [loading, setLoading] = useState(false);
     const { articles } = useFetchHook();
     const [pageSelect, setPageSelect] = useState(1);
 

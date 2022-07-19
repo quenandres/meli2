@@ -5,17 +5,11 @@ Prueba realizada con nodejs y reactjs, ambos proyectos realizados con javascript
 La idea original era dockerizar las 3 app en contenedores aparte, unicamente use redis en docker, el resto de la instalación se realizo localmente.
 ```bash
 node -v
-```
->
-```
 v14.17.0
 ```
 
 ```bash
 npm -v
-```
->
-```
 6.14.13
 ```
 
@@ -64,17 +58,13 @@ Para ejecutar en ambos proyectos
 ```
 npm run test
 ```
-
-    
-
-
 ## API
 
 #### Get 
 ```http
   GET /
 ```
-Nos devuelte un array de objetos con los campos de longitud de 100.
+Nos devuelte un json con los campos de longitud de 100.
 ```
 [{title, url, imageUrl}]
 ```

@@ -63,3 +63,10 @@ Prueba realizada con nodejs y reactjs, ambos proyectos realizados con javascript
 ```
 
 
+-----
+# docs
+https://testing-library.com/docs/queries/about/
+https://www.paradigmadigital.com/dev/react-testing-library-como-testear-hooks/
+https://testing-library.com/docs/dom-testing-library/api-events
+https://testing-library.com/docs/queries/bytestid/#api
+https://testing-library.com/docs/react-testing-library/api/#queries

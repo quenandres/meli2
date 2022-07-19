@@ -26,7 +26,7 @@ function ListArticles() {
                 })}
             </MDBRow>
                 
-        <Paginator items={items} pageSelect={pageSelect} setPageSelect={setPageSelect} />
+        <Paginator items={items} setPageSelect={setPageSelect} />
     </>
     );
 }

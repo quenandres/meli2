@@ -1,32 +1,21 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import ListArticles from './../../pages/ListArticles';
-
+import userEvent from '@testing-library/user-event';
 
 describe('<ListArticles /> Pagina principal de los articulos', () => {
-    it('Titulo principal indicando que la pagina es la #1', () => {
+    it('Titulo principal indicando que la pagina es la #1', async () => {
         render(<ListArticles />);
-        screen.getByText('Articles - pagina #1', {exact: true});
+        const title = await screen.findByText('Articles - pagina #1');
+        expect(title).toBeInTheDocument();
     });
 
-    it('cantidad de cards en la pantalla', async () => {
+    it('Comprobacion de cambio de pagina', async() => {
         render(<ListArticles />);
+        const button = screen.getByRole('button', { name: /next/i });
+        // Simulate clicking button
+        userEvent.click(button);
         
-        const cards = await screen.findAllByText(/button/i);
-        expect(cards.length).toBe(10);
+        const title = await screen.findByText('Articles - pagina #2');
+        expect(title).toBeInTheDocument();
     });
-
-
-
-
-    /*it('Click en el boton de cambio de pagina', () => {
-        render(<ListArticles />);
-        fireEvent.click(screen.getByText(/next/i));
-
-        
-        // renderApp();
-        // fireEvent.click(screen.getByTestId("button-target"));
-        // expect(screen.getByTestId("on-click-span")).toHaveTextContent(onClickValue);
-        // expect(screen.getByTestId("on-hover-span")).toHaveTextContent(onHoverValue);
-        
-    });*/
 });

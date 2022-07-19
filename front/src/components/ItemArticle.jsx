@@ -15,7 +15,7 @@ function ItemArticle({article}) {
                     src={article.imageUrl}
                     />
                     <Card.Body>
-                        <Card.Title>{article.title} - {article.page}</Card.Title>
+                        <Card.Title>{article.title}</Card.Title>
                         <Card.Text>
                             <a href={article.url}>
                                 <Button variant="primary">Ir</Button>

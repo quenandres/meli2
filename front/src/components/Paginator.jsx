@@ -8,7 +8,7 @@ const List = styled('ul')({
   display: 'flex',
 });
 
-export default function UsePagination({ items, pageSelect, setPageSelect }) {
+export default function UsePagination({ items, setPageSelect }) {
   return (
     <nav>
       <List>

@@ -18,7 +18,7 @@ function ItemArticle({article}) {
                         <Card.Title>{article.title} - {article.page}</Card.Title>
                         <Card.Text>
                             <a href={article.url}>
-                                <Button variant="primary">Go somewhere</Button>
+                                <Button variant="primary">Ir</Button>
                             </a>
                         </Card.Text>
                     </Card.Body>

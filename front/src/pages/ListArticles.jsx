@@ -18,11 +18,11 @@ function ListArticles() {
     // title, url, imageUrl
     return ( 
     <>
+            <h4>Articles - pagina #{pageSelect}</h4>
             <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
                 {articles.length && articles.map((article, index) => {
-                    if(article.page === pageSelect) {
-                        return <ItemArticle key={index + 1} article={article} />
-                    }
+                    if(article.page === pageSelect) return <ItemArticle key={index + 1} article={article} />
+                    return '';
                 })}
             </MDBRow>
                 

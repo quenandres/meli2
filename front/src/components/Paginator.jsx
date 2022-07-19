@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
-import Pagination from 'react-bootstrap/Pagination';
 
 const List = styled('ul')({
   listStyle: 'none',

@@ -1,6 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ItemArticle from './../../components/ItemArticle';
-import userEvent from '@testing-library/user-event';
 
 describe('<ItemArticle /> ItemArticle', () => {
     const article = {

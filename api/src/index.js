@@ -22,6 +22,7 @@ client.on('error', (err) => console.log('Redis Client Error', err));
 //Configuraciones
 app.set('port', process.env.PORT || 6060);
 app.set('json spaces', 2)
+
 // Añade middleware para ver las cabeceras de tiempo en las solicitudes
 app.use(responseTime());
  
@@ -44,8 +45,9 @@ const optionsCors = {
   }
 }
 
-app.use(cors(optionsCors));
+// Originalmente puse el header de cache para mantenerlo por 5min pero no funcionaba como esperaba asi que decidi usar redis el cual funciono como deberia.
 
+app.use(cors(optionsCors));
 const __API__ = 'https://api.spaceflightnewsapi.net/v3/articles?_limit=100';
 
 /**
@@ -55,7 +57,7 @@ app.get('/', async (req, res) => {
     try {
       const reply = await GET_ASYNC('articles');
       if(reply) {
-        //console.log('Trae datos del REDIS');
+        //'Trae datos del REDIS'
         return res.json(JSON.parse(reply));
       }
       
@@ -64,17 +66,18 @@ app.get('/', async (req, res) => {
       let response = data.map(({title, url, imageUrl}) => {
         return {title, url, imageUrl};
       });
-      //console.log('Trae datos del api');      
+
+      // Trae datos del api
       await SET_ASYNC('articles', JSON.stringify({ data: response }));
       
-      // Genero metodo para que elimine datos cada 5min
-      setInterval(async () => {
-        const exist = await GET_ASYNC('articles');
-        if( exist ) {
-          //console.log('-----------------Elimina datos de REDIS a los 5min');
-          await DEL_ASYNC('articles');
-        }
-      }, 10000);
+        // Genero metodo para que elimine datos cada 5min
+        setInterval(async () => {
+          const exist = await GET_ASYNC('articles');
+          if( exist ) {
+            // '-----------------Elimina datos de REDIS a los 5min
+            await DEL_ASYNC('articles');
+          }
+        }, 10000);
 
       return res.status(200).json({data: response});
     } catch (error) {
@@ -82,10 +85,7 @@ app.get('/', async (req, res) => {
     }
 });
 
-/* app.get('*', function(req, res){
-  res.status(404).json({message: 'Not found'});
-}); */
-
+// Ruta default
 app.use(function(req, res){
   res.send(404);
 });

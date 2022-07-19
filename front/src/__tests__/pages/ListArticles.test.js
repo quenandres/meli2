@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import ListArticles from './../../pages/ListArticles';
 import userEvent from '@testing-library/user-event';
 
@@ -12,9 +12,9 @@ describe('<ListArticles /> Pagina principal de los articulos', () => {
     it('Comprobacion de cambio de pagina', async() => {
         render(<ListArticles />);
         const button = screen.getByRole('button', { name: /next/i });
-        // Simulate clicking button
-        userEvent.click(button);
         
+        userEvent.click(button);
+
         const title = await screen.findByText('Articles - pagina #2');
         expect(title).toBeInTheDocument();
     });

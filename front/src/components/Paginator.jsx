@@ -41,7 +41,8 @@ export default function UsePagination({ items, setPageSelect }) {
             );
           }
 
-          if( page > 0 && page <=10 ) {
+          // Si la paginación es diferente a los valores, no se cambiara el valor de la pagina.
+          if( page > 0 && page <=10 ) { 
             return <li key={index} onClick={() => setPageSelect(page)}>{children}</li>;
           } else {
             return <li key={index}>{children}</li>;
